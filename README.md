@@ -52,6 +52,34 @@ You'll also want to add your string reverse function and the maximum function to
 
 ## Part 2. Needleman-Wunsch Global Alignment
 
+The function signature for our alignment function is a bit verbose. Let's walk through it
+
+```c
+void needleman_wunsch_alignment(const char *seq1,
+                                const int seq1_len,
+                                const char *seq2,
+                                const int seq2_len,
+                                int (*scoringf)(char,char),
+                                char **align1,
+                                int *align1_len,
+                                char **align2,
+                                int *align2_len
+                                );
+```
+Firs this function takes two sequences, `seq1` and `seq2` as well as their lengths. These variables are `const` since we will not
+be modifying them. They represent the sequences we obtained from the files. Then we see the function pointer (go to notes if you don't understand this).
+The function pointer `scoringf` is a pointer to a function which takes two chars and returns an int. We will use this to compute the score from a pair of 
+residues in the sequence. Note to use a function pointer you must dereference it first
+```
+int score = (*scoringf)('a', 'b');
+```
+Next we have two pointers to character arrays, `align1` and `align2` along with their lengths. In this assignment, we could use
+a string interpretation of character arrays such that we put as the last charater in the array `\0`. I chose to force you to use the 
+character array interpretation (cannot assume `\0` termination) for a couple of reasons. In my expirience with C code in industry,
+we often times want to write the safest most robust code possible. Assuming a pointer to a string with a `\0` termination is risky. This could 
+lead to a catastrophic error if another programmer on the project has an off-by-1 error and forgets to `\0` terminate the string he/she created. 
+
+If you're interested in these types of hacks, there's some interesting tutorials [here](https://blog.holbertonschool.com/hack-the-virtual-memory-c-strings-proc/)
 
 ## Part 3. Analysis, Debugging, Testing
 
@@ -61,6 +89,20 @@ Your program should handle errors such as a user not following the correct inter
 ./align middle file1.fasta file2.fasta outfile.clustal
 ```
 should return an error stating middle is not a valid scoring function, the choices are `blosum` or `edit`. 
+
+You will find the print matrix function we wrote very helpful for debugging. While you are working to get 
+the first gene alignment to work, using the two test fasta files, you will want to probably
+print out the scoring matrix in the NeedlemanWunsch function while you are working. Just remember to turn it off when you submit your code.
+
+It is good practice using a guarded if statement like this in your code. Then when you submit
+you just need to remember to change DEBUG from 1 to 0. 
+```c
+#define DEBUG 1````
+...
+if (DEBUG) {
+    something
+}
+```
 
 
 
