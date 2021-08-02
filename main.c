@@ -1,11 +1,10 @@
-//
-// Created by Austin Clyde on 8/1/21.
-//
-
 #include <stdio.h>
+#include <stdlib.h>
+#include "fasta.h"
+#include "alignment.h"
+#include "scoring/scoring.h"
 
-
-int main(int argc, char *argv) {
+int main(int argc, char **argv) {
 
     return(0);
 }

@@ -1,14 +1,15 @@
-//
-// Created by Austin Clyde on 8/1/21.
-//
-
 #ifndef LAB3_FASTA_H
 #define LAB3_FASTA_H
 
+
 /**
- * returns a string (or char array, depending on how you think of it) which contains the first sequence from a fasta file
+ * params:
+ *      filename -> string filename to where to read from
+ * returns:
+ *      sequence1 -> pointer to a CHAR ARRAY (not a string)
+ *      length1 -> length of the array
  */
-char* readFastaFormat(char *filename);
+void readFastaFormat(const char *filename,  char **sequence1, unsigned int* length1);
 
 
 #endif //LAB3_FASTA_H

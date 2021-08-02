@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "fasta.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 
-char* readFastaFormat(char *filename) {
-    return NULL;
-}
+void readFastaFormat(const char *filename,  char **sequence1, unsigned int* length1);
