@@ -4,11 +4,11 @@ int** matrixInit(int rows, int cols, int value){
     return(0);
 }
 
-int matrixMin(int **arr, int rows, int cols, int value){
+int matrixMin(int **arr, int rows, int cols){
     return(0);
 }
 
-int matrixMax(int **arr, int rows, int cols, int value){
+int matrixMax(int **arr, int rows, int cols){
     return(0);
 }
 
