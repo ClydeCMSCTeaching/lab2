@@ -51,6 +51,57 @@ format string followed by the things you are printing. Remember to use `fclose` 
 You'll also want to add your string reverse function and the maximum function to `utils.h` and `utils.c`.
 
 ## Part 2. Needleman-Wunsch Global Alignment
+You will not need to reinvent the algorithmic wheel. Here is a sketch of the algorithm, and I will go over it during lab sessions.
+The steps are (1) compute the score matrix, and (2) backtrace to get the alignment. 
+
+For the first step, 
+
+```asm
+for i = 0 to length(A) #include endpoint 
+    F(i,0) ← d * i
+for j = 0 to length(B) #include end point
+    F(0,j) ← d * j
+for i = 1 to length(A) #include endpoint
+    for j = 1 to length(B) #include endpoint
+    {
+        Match ← F(i−1, j−1) + S(Ai-1, Bj-1)
+        Delete ← F(i−1, j) + d
+        Insert ← F(i, j−1) + d
+        F(i,j) ← max(Match, Insert, Delete)
+    }
+```
+
+This fills in the score matrix. Now for the backtrace we need to build up a string
+
+```asm
+AlignmentA ← ""
+AlignmentB ← ""
+i ← length(A)
+j ← length(B)
+while (i > 0 or j > 0)
+{
+    if (i > 0 and j > 0 and F(i, j) == F(i−1, j−1) + S(Ai-1, Bj-1))
+    {
+        AlignmentA ← Ai-1 + AlignmentA
+        AlignmentB ← Bj-1 + AlignmentB
+        i ← i − 1
+        j ← j − 1
+    }
+    else if (i > 0 and F(i, j) == F(i−1, j) + d)
+    {
+        AlignmentA ← Ai-1 + AlignmentA
+        AlignmentB ← "−" + AlignmentB
+        i ← i − 1
+    }
+    else
+    {
+        AlignmentA ← "−" + AlignmentA
+        AlignmentB ← Bj-1 + AlignmentB
+        j ← j − 1
+    }
+}
+```
+Now at the end we have the two alignments!
 
 The function signature for our alignment function is a bit verbose. Let's walk through it
 
@@ -108,6 +159,7 @@ if (DEBUG) {
 
 ## Notes
 - The skeleton code provided is meant to get you started. In this assignment, the graders will be evaluating your outputfiles for correctness. Therefore you can change the function signatures and file structure of this code. You may need to in fact.
+- The `makefile` is already set up for you. All you need to run to compile your code is `make`
 - Function pointers: what happens when you want to use one function for scoring sometimes and another function for scoring other times? In thie lab, we want to switch the scoring functions we use depending on the user provided argument. Well, luckily functions have a type and we can pass them to other functions when needed.
 
 ```c
