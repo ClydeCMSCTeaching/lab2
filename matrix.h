@@ -12,12 +12,12 @@ int** matrixInit(int rows, int cols, int value);
 /*
  * get the min value in the array
  */
-int matrixMin(int **arr, int rows, int cols, int value);
+int matrixMin(int **arr, int rows, int cols);
 
 /*
  * get the max value in the array
  */
-int matrixMax(int **arr, int rows, int cols, int value);
+int matrixMax(int **arr, int rows, int cols);
 
 
 /*
