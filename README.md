@@ -133,7 +133,13 @@ lead to a catastrophic error if another programmer on the project has an off-by-
 If you're interested in these types of hacks, there's some interesting tutorials [here](https://blog.holbertonschool.com/hack-the-virtual-memory-c-strings-proc/)
 
 ## Part 3. Analysis, Debugging, Testing
-
+You should align the delta variant glycoprotein to every other variant (alpha, beta, and gamma) and store these in your repo when you submit (we will check them for correctness).
+i.e.
+```shell
+./align blosum fastafiles/delta_glycoprotein_sars_cov_2.fasta fastafiles/alpha_glycoprotein_sars_cov_2.fasta d_a.txt
+./align blosum fastafiles/delta_glycoprotein_sars_cov_2.fasta fastafiles/beta_glycoprotein_sars_cov_2.fasta d_b.txt
+./align blosum fastafiles/delta_glycoprotein_sars_cov_2.fasta fastafiles/gamma_glycoprotein_sars_cov_2.fasta d_g.txt
+```
 #### Error Handling
 Your program should handle errors such as a user not following the correct interface to run the program. For instance
 ```shell
